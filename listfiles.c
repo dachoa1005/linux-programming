@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
 {
     printf("\n");
     char *path;
-    char file_path[1024];
+    char full_file_path[1024];
     DIR *d;
     struct dirent *dir;
     struct stat file_stat;
@@ -30,12 +30,12 @@ int main(int argc, char const *argv[])
 
         while ((dir = readdir(d)) != 0)
         {
-            strcpy(file_path, argv[1]);
-            strcat(file_path, "/");
-            strcat(file_path, dir->d_name); // get full of filepath
+            strcpy(full_file_path, argv[1]);
+            strcat(full_file_path, "/");
+            strcat(full_file_path, dir->d_name); // get full of filepath
 
             // print file mode
-            stat(file_path, &file_stat);
+            stat(full_file_path, &file_stat);
             printf((S_ISDIR(file_stat.st_mode)) ? "d" : "-");
             printf((file_stat.st_mode & S_IRUSR) ? "r" : "-");
             printf((file_stat.st_mode & S_IWUSR) ? "w" : "-");
